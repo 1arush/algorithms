@@ -14,7 +14,6 @@ void insert(int x, int v){
 }
 
 int query(int x){
-  x=~x;
   int p=0, res=0;
   for(int i=31; ~i; --i){
     int u=(x>>i)&1;

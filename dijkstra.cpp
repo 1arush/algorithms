@@ -1,3 +1,4 @@
+// graph is weighted, starting vertex is "start"
 vector<int> dist(N,1e18);
 priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
 pq.emplace(0,start), dist[start]=0;

@@ -1,22 +1,9 @@
-#define _CRT_SECURE_NO_WARNINGS
-
-// @author: rushil
-
-#include <bits/stdc++.h>
-using namespace std;
-
-long long binary_power(long long a, long long b){
-    long long res=1;
-    while(b>0){
-        if(b&1) res=res*a;
-        a*=a; b>>=1;
-    }
-    return res;
-}
-
-int main(){
-    ios::sync_with_stdio(0); cin.tie(0);
-
-    long long a,b; cin>>a>>b;
-    cout<<binary_power(a,b);
+template <typename T> 
+T binpow(T x, T n, T m=MOD){  // MOD=1e9+7
+	T res=1;
+	while(n){
+		if(n&1) res=res*x%m;
+		x=x*x%m; n>>=1;
+	}
+	return res;
 }

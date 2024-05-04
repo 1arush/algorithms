@@ -1,46 +1,68 @@
-#define _CRT_SECURE_NO_WARNINGS
-
-// @author: rushil
-
 #include <bits/stdc++.h>
 using namespace std;
-
-// Used to divide a digraph into strongly connected components
-
-map<int,vector<int>>g;
-map<int,vector<int>>rg;
-int n,m,k=1; 
-vector<bool>mark(n+1,0),mark2(n+1,0);
-vector<int>label(n+1),p;
-
-void dfs(int i){
-    if(mark[i]) return;
-    mark[i]=true;
-    for(int x:g[i]) dfs(x);
-    p.push_back(i);
-}
-void dfs2(int i){
-    if(mark2[i]) return;
-    mark2[i]=true;
-    for(int x:rg[i]) dfs2(x);
-    label[i]=k;
-}
-
-int main(){
-    ios::sync_with_stdio(false); cin.tie(NULL);
-
-    cin>>n>>m;
-    for(int i=0;i<m;i++){
-        int x,y; cin>>x>>y;
-        g[x].push_back(y);
-        rg[y].push_back(x);
-    }
-    for(int i=1;i<=n;i++) dfs(i);
-    reverse(p.begin(),p.end());
-    for(int i:p){
-        if(!mark2[i]){
-            dfs2(i); ++k;
+ 
+vector<vector<int>> gr, rg;
+vector<int> col, seen, p;
+int k=0;
+ 
+void dfs1(int u){
+        seen[u]=1;
+        for(int v:gr[u]){
+                if(seen[v]) continue;
+                dfs1(v);
         }
-    }
-    for(int i=1;i<=n;i++) cout<<label[i]<<' ';
+        p.push_back(u);
+}
+ 
+void dfs2(int u){
+        seen[u]=1;
+        for(int v:rg[u]){
+                if(seen[v]) continue;
+                dfs2(v);
+        }
+        col[u]=k;
+}
+ 
+int32_t main(){
+        ios::sync_with_stdio(0), cin.tie(0);
+
+#ifndef ONLINE_JUDGE
+        freopen("inp.txt","r",stdin);
+        freopen("out.txt","w",stdout);
+#endif
+ 
+// input : graph
+// output : vector 'col' containing labels for all nodes
+        
+        int n;
+        cin>>n;
+        gr.resize(n);
+        rg.resize(n);
+        col.resize(n);
+        seen.resize(n);
+        int m;
+        cin>>m;
+        while(m--){
+                int u,v;
+                cin>>u>>v;
+                // --u, --v;
+                gr[u].push_back(v);
+                rg[v].push_back(u);
+        }
+        for(int i=0; i<n; ++i){
+                if(!seen[i]){
+                        dfs1(i);
+                }
+        }
+        seen.assign(n,0);
+        reverse(p.begin(),p.end());
+        for(int x:p){
+                if(!seen[x]){
+                        dfs2(x), ++k;
+                }
+        }
+        for(int i=0; i<n; ++i){
+                cout<<col[i]<<' '; // color of each node
+        }
+        return 0;
 }

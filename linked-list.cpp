@@ -14,3 +14,11 @@ Node* add(Node *root, Node *t){
         root->last=t->last;
         return root;
 }
+
+void print(Node *root){
+        while(root){
+                cout<<root->val<<' ';
+                root=root->next;
+        }
+        cout<<'\n';
+}

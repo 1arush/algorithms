@@ -1,27 +1,37 @@
-#include <bits/stdc++.h>
-#define debug(x) (cout<<'['<<(#x)<<':'<<(x)<<']'<<'\n')
-using namespace std;
+// run init (note graph is a directed tree)
 
-const int N=2e5+5, LOG=19; // LOG = log2(N)
+const int LOG=20; // LOG = log2(N)
 
-vector<vector<int>> up(N,vector<int> (LOG)); 
-vector<int> par(N,0);
+vector<vector<int>> up, adj; 
+vector<int> dep, par;
 
-int main(){
-  ios::sync_with_stdio(0), cin.tie(0);
+void dfs(int i){
+        for(int j:adj[i]){
+                dep[j]=dep[i]+1, up[j][0]=i;
+                for(int k=1; k<LOG; ++k){
+                        up[j][k]=up[up[j][k-1]][k-1];
+                }
+                dfs(j);
+        }
+}
 
-  int n,m;
-  cin>>n;
-  // m = n-1 , root = 1
-  for(int i=1; i<=n; i++){
-    cin>>par[i];
-    up[i][0]=(i==par[i] ? -1 : par[i]);
-  }
-  for(int p=1; p<LOG; p++){
-    for(int i=1; i<=n; i++){
-      int old=up[i][p-1];
-      up[i][p]=up[old][p-1];
-    }
-  }
-  return 0;
+void init(int root){
+        up[root][0]=root, dep[root]=0;
+        dfs(root);
+}
+
+int query(int u, int v){
+        if(dep[u]<dep[v]) swap(u,v);
+        int D=dep[u]-dep[v];
+        for(int j=0; j<LOG; ++j){
+                if(D&(1<<j)) u=up[u][j];
+        }
+        if(u==v){
+                cout<<u<<'\n'; 
+                return;
+        }
+        for(int j=LOG-1; ~j; --j){
+                if(up[u][j]!=up[v][j]) u=up[u][j], v=up[u][j];
+        }
+        cout<<up[u][0]<<'\n';
 }

@@ -1,6 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-
 void count_sort(vector<int> &p, vector<int> &c){
         const int n=p.size();
         vector<int> cnt(n), pos(n), p_new(n);
@@ -17,18 +14,9 @@ void count_sort(vector<int> &p, vector<int> &c){
         p=p_new;
 }
 
-int32_t main(){
-        ios::sync_with_stdio(0), cin.tie(0);
-
-#ifndef ONLINE_JUDGE
-        freopen("inp.txt","r",stdin);
-        freopen("out.txt","w",stdout);
-#endif
-
-        string s;
-        cin>>s;
+vector<int> suffix_array(string &s){
         s+='$';
-        int n=s.size();
+        const int n=s.size();
         vector<int> p(n), c(n);
         {
                 // k = 0 : base case
@@ -60,8 +48,5 @@ int32_t main(){
                 c=c_new;
                 ++k;
         }
-        for(int i=0; i<n; ++i){
-                cout<<p[i]<<' ';
-        }
-        return 0;
+        return p;
 }

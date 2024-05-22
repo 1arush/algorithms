@@ -1,8 +1,8 @@
 // only used for 1-indexing
 // if using for 0-base, add 1 to all indices
 
-const int MXN=2e5+5;
-int fen[MXN], n;
+const int mxN=2e5+5;
+int fen[mxN], n;
 
 void init(int sz){
         for(int i=0; i<=sz; ++i) fen[i]=0;

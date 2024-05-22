@@ -1,19 +1,17 @@
 int pow(int g, int x, int M){
-        x=(M+x)%M;
-        int res=1;
+        x=(x%M+M)%M;
+        int ret=1;
         while(x){
-                if(x&1) res=res*g%M;
-                x>>=1, g=g*g%M;
+                if(x&1) ret=(ret*g)%M;
+                x>>=1, g=(g*g)%M;
         }
-        return res;
+        return ret;
 }
 
 int shank_algo(int g, int M, int r){
         // solves for g^x = r (mod M)
         
-        // g = generator
-        // M = modulus
-        // r = value
+        // g = generator, M = modulus, r = value of mod
         vector<pair<int,int>> f, s;
         int m=(int)ceil(sqrtl(M-1));
         for(int i=0; i<m; ++i){
@@ -22,7 +20,6 @@ int shank_algo(int g, int M, int r){
         }
         sort(f.begin(),f.end());
         for(int i=0; i<m; ++i){
-                // since g^(M-1) = 1 (mod M)
                 // we have g^(-i) = g^(M-1-i) (mod M)
                 int g_i=pow(g,(M-1-i),M);
                 s.emplace_back(r*g_i%M,i);

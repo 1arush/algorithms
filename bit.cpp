@@ -10,7 +10,7 @@ void reset(int sz){
         for(int i=0; i<=sz; ++i) fen[i]=0;
 }
 
-void get(int x){
+int get(int x){
         int ret=0;
         for(++x; x>0; x-=x&-x) ret+=fen[x];
         return ret;

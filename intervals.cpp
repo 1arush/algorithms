@@ -13,7 +13,7 @@ handle the cases where n=1, often leads to RTE
 auto it=ms.lower_bound(x);
 if(it==ms.begin() && ms.size()>=2){
         // if smallest element
-        d.erase(d.find(*pt-*next(it)));
+        d.erase(d.find(*next(it)-*it));
 }
 else if(next(it)==ms.end() && ms.size()>=2){
         // if largest element

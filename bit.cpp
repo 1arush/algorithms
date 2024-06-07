@@ -1,6 +1,6 @@
-// originally used for 1-indexing
-// if using for 0-base, ++ before query
-// query like : get(x) = sum[0,x]
+// use with 0-base (works 1-base internally)
+// get(x)=sum of [0..x-1]
+// add(x,v)=add v to a[x]
 
 const int MXN=2e5+5;
 

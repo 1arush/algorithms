@@ -2,9 +2,9 @@
 // if using for 0-base, ++ before query
 // query like : get(x) = sum[0,x]
 
-const int mxN=2e5+5;
+const int MXN=2e5+5;
 
-int fen[mxN], n;
+int fen[MXN], n;
 
 void reset(int sz){
         for(int i=0; i<=sz; ++i) fen[i]=0;

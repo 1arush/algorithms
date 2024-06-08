@@ -1,5 +1,5 @@
 vector<int> kmp(string &s){
-        // p[i] is the length of longest prefix 
+        // p[i] is the length of longest prefix (1-base index)
         // in [0,i) which is also a suffix of this substring
         const int n=s.size();
         vector<int> p(n+1);

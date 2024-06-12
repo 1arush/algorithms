@@ -1,4 +1,4 @@
-// finding bridges offline in O(n) using DFS
+// finding bridges offline in O(n+m) using DFS
 
 vector<vector<int>> gr;
 vector<int> tin, low, vis;

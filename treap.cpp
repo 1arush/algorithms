@@ -1,5 +1,4 @@
-auto seed = chrono::high_resolution_clock::now().time_since_epoch().count();
-mt19937 rnd(seed);
+mt19937 rnd(chrono::steady_clock::now().time_since_epoch().count());
 
 struct Node{
         int x,y,size;

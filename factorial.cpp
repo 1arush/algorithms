@@ -12,5 +12,6 @@ void factorial(){
 }
 
 int C(int n, int r){
+        if(n==r) return (int)1;
         return fac[n]*ifac[r]%M*ifac[n-r]%M;
 }

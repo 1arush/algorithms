@@ -3,6 +3,7 @@ const int MXN=1e6+6;
 vector<int> lp(MXN);
 
 void sieve(){
+        lp[1]=1;
         for(int i=2; i<MXN; ++i){
                 if(lp[i]==0){
                         lp[i]=i;

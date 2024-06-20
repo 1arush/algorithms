@@ -23,13 +23,13 @@ void dfs(int u, int p){
 }
 
 void find_bridges(){
-        // init and read graph 
         t=0; 
         gr.resize(n);
         tin.resize(n);
         low.resize(n);
         vis.resize(n);
-        // no multiple edges
+        // read graph 
+        // (no multiple edges)
         for(int i=0; i<n; ++i){
                 if(!vis[i]){  // each connected component
                         dfs(i,-1);

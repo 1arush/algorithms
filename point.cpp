@@ -15,13 +15,10 @@ struct Pt {
         bool operator <(const Pt &b) const {
                 return make_pair(x,y)<make_pair(b.x,b.y);
         }
-        int dot(const Pt &b) const { 
-                return x*b.x+y*b.y; 
-        }
         int cross(const Pt &b) const { 
-                return x*b.y-y*b.x; 
+                return x*b.y-y*b.x;  // a x b
         }
         int triangle(const Pt &a, const Pt &b) const { 
-                return (a-*this).cross(b-*this);  
+                return (a-*this).cross(b-*this);  // pa x pb
         }
 };

@@ -23,7 +23,7 @@ void dfs(int u, int p){
 }
 
 void find_bridges(){
-        // read graph 
+        // init and read graph 
         t=0; 
         gr.resize(n);
         tin.resize(n);

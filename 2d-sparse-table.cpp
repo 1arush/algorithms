@@ -29,7 +29,7 @@ void preprocess(){
 }
 
 int query(int x1, int y1, int x2, int y2){
-        if(x2<x1 || y2<y1 || x1<1 || y1<1 ||x2>n || y2>m) return -1;
+        if(x2<x1 || y2<y1 || x1<1 || y1<1 || x2>n || y2>m) return -1;
         int a=31-__builtin_clz(x2-x1+1);
         int b=31-__builtin_clz(y2-y1+1);
         return max(max(st[x1][y1][a][b],

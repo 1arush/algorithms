@@ -24,10 +24,10 @@ void dfs(int u, int p){
 
 void find_bridges(){
         t=0; 
-        gr.resize(n);
-        tin.resize(n);
-        low.resize(n);
-        vis.resize(n);
+        gr=vector<vector<int>>(n);
+        tin=vector<int>(n);
+        low=vector<int>(n);
+        vis=vector<int>(n);
         // read graph 
         // (no multiple edges)
         for(int i=0; i<n; ++i){

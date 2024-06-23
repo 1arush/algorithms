@@ -2,7 +2,7 @@
 
 const int MXN=505, LOG=10;
 
-int a[MXN][MXN], st[MXN][MXN][LOG][LOG];
+int a[MXN][MXN], st[MXN][MXN][LOG][LOG], n, m;
 
 void preprocess(){
         for(int i=1; i<=n; ++i){

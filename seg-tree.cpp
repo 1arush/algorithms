@@ -1,50 +1,60 @@
-// Point update range get
-template <typename T>
-struct SegmentTree {
-        int sz=1, n;
-        vector<T> tree;
-        SegmentTree(int _n) : n(_n) {
-                while(sz<n) sz<<=1;
-                tree.resize(2*sz);
-        }
-        void set(int i, T v, int x, int lx, int rx){
-                if(rx-lx==1){
-                        tree[x]=v; return;
-                }
-                int m=(lx+rx)/2;
-                if(i<m) set(i,v,2*x+1,lx,m);
-                else set(i,v,2*x+2,m,rx);
-                tree[x]=tree[2*x+1]+tree[2*x+2];
-        }
-        T query(int l, int r, int x, int lx, int rx){
-                if(lx>=r || rx<=l) return (T)0;
-                if(lx>=l && rx<=r) return tree[x];
-                int m=(lx+rx)/2;
-                return query(l,r,2*x+1,lx,m)+query(l,r,2*x+2,m,rx);
-        }
-};
+struct Segtree {  // [l,r] inclusive
+        int sz=1, NOP=-1;
+        vector<int> tree;
 
-// Range update point get
-template <typename T>
-struct SegmentTree {
-        int sz=1, n;
-        vector<T> tree;
-        SegmentTree(int _n) : n(_n) {
+        void init(int n){
                 while(sz<n) sz<<=1;
                 tree.resize(2*sz);
         }
-        void add(int l, int r, T v, int x, int lx, int rx){
-                if(l>=rx || r<=lx) return;
-                if(l<=lx && r>=rx){
-                        tree[x]+=v; return;
+
+        void apply(int &a, int b){  // addition
+                if(b==NOP) return;
+                if(a==NOP) a=0;
+                a+=b;
+        }
+
+        void push(int x, int lx, int rx){
+                if(lx==rx) return;
+                apply(tree[2*x+1],tree[x]);
+                apply(tree[2*x+2],tree[x]);
+                tree[x]=NOP;
+        }
+
+        void add(int l, int r, int v, int x, int lx, int rx){
+                push(x,lx,rx);
+                if(lx>=l && rx<=r){
+                        apply(tree[x],v); 
+                        return;
+                }
+                if(rx<l || lx>r){
+                        return;
                 }
                 int m=(lx+rx)/2;
-                add(l,r,v,2*x+1,lx,m), add(l,r,v,2*x+2,m,rx);
+                add(l,r,v,2*x+1,lx,m);
+                add(l,r,v,2*x+2,m+1,rx);
         }
-        T get(int i, int x, int lx, int rx){
-                if(rx-lx==1) return tree[x];
+
+        void add(int l, int r, int v){
+                add(l,r,v,0,0,sz-1);
+        }
+
+        int get(int i, int x, int lx, int rx){
+                push(x,lx,rx);
+                if(lx==rx){
+                        return tree[x];
+                }
                 int m=(lx+rx)/2;
-                T v=(i<m ? get(i,2*x+1,lx,m) : get(i,2*x+2,m,rx));
-                return tree[x]+v;
+                int res;
+                if(i<=m){
+                        res=get(i,2*x+1,lx,m);
+                }else{
+                        res=get(i,2*x+2,m+1,rx);
+                }
+                apply(res,tree[x]);
+                return res;
+        }
+
+        int get(int i){
+                return get(i,0,0,sz-1);
         }
 };

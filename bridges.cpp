@@ -22,7 +22,7 @@ void dfs(int u, int p){
         }
 }
 
-void find_bridges(){
+void bridges(){
         t=0; 
         gr=vector<vector<int>>(n);
         tin=vector<int>(n);

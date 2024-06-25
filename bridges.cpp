@@ -1,4 +1,4 @@
-// finding bridges offline in O(n+m) using DFS
+// finding bridges offline in O(n+m) using dfs
 
 vector<vector<int>> gr;
 vector<int> tin, low, vis;
@@ -9,15 +9,15 @@ void dfs(int u, int p){
         tin[u]=low[u]=t++;
         for(int v:gr[u]){
                 if(v==p) continue;
-                if(!vis[v]){
+                if(vis[v]){
+                        low[u]=min(low[u],tin[v]);       
+                }else{
                         dfs(v,u);
                         low[u]=min(low[u],low[v]);
                         if(low[v]>tin[u]){  
                                 cout<<u<<' '<<v<<'\n';
-                                // bridge found -> back-edge iff low[v]<=tin[u]
+                                // bridge :: back-edge iff low[v]<=tin[u]
                         }
-                }else{
-                        low[u]=min(low[u],tin[v]);
                 }
         }
 }

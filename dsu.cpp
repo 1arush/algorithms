@@ -1,7 +1,6 @@
-struct DSU {
-        int n;
+struct unionfind {
         vector<int> sz, p;
-        DSU(int _n) : n(_n){
+        unionfind(int n){
                 sz.assign(n,1), p.resize(n);
                 iota(p.begin(),p.end(),0);
         }
@@ -15,8 +14,6 @@ struct DSU {
         void unite(int a, int b){  // union by size
                 a=leader(a), b=leader(b);
                 if(sz[a]<sz[b]) swap(a,b);
-                if(a!=b){
-                        p[b]=a, sz[a]+=sz[b];
-                }
+                if(a!=b) p[b]=a, sz[a]+=sz[b];
         }
 };

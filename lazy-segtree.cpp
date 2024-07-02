@@ -1,4 +1,5 @@
 // it suffices to change merge and apply 
+// uses inclusive queries for calling
 // originally for addition and sum (more @EDU)
 
 struct Segtree {

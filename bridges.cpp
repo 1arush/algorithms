@@ -24,10 +24,10 @@ void dfs(int u, int p){
 
 void bridges(){
         t=0; 
-        gr=vector<vector<int>>(n);
-        tin=vector<int>(n);
-        low=vector<int>(n);
-        vis=vector<int>(n);
+        gr=vector<vector<int>> (n);
+        tin=vector<int> (n);
+        low=vector<int> (n);
+        vis=vector<int> (n);
         // read graph 
         // (no multiple edges)
         for(int i=0; i<n; ++i){

@@ -1,20 +1,17 @@
-int L=l, R=n;
-auto f=[&](int l, int r)-> int {
-    int s=pf[r]-pf[l-1];
-    // sum of (u..u-s+1)
-    return s*(2ll*u-s+1)/2;
-};
-while(R-L>2){
-    // convex function (hill shape)
-    int M1=L+(R-L)/3;
-    int M2=R-(R-L)/3;
-    
-    int f1=f(l,M1);
-    int f2=f(l,M2);
+// snippet from 1928D 
 
-    if(f1<f2) L=M1;
-    else R=M2;
+int lb=1, rb=ts+1;
+while(rb>lb+3){
+        // hill shape
+        int m1=lb+(rb-lb)/3;
+        int m2=rb-(rb-lb)/3;
+        if(f(m1)<f(m2)){
+                lb=m1; 
+        }else{
+                rb=m2;
+        }
 }
-// check manually in [L,L+2]
-if(L+1<=n && f(l,L+1)>f(l,L)) ++L;
-if(L+1<=n && f(l,L+1)>f(l,L)) ++L;
+int ans=0;
+for(int d=lb; d<=rb; ++d){
+        ans=max(ans,f(d));
+}

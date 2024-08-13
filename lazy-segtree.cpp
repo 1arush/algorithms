@@ -48,19 +48,19 @@ struct Segtree {
                 chg(l,r,v,2*x+2,m,rx);
                 tree[x]=apply(merge(tree[2*x+1],tree[2*x+2]),lazy[x],rx-lx);
         }
-        int ask(int l, int r, int x, int lx, int rx){
+        int qry(int l, int r, int x, int lx, int rx){
                 push(x,lx,rx);
                 if(rx<=l || lx>=r) return NEUTRAL;
                 if(lx>=l && rx<=r) return tree[x];
                 int m=(lx+rx)/2;
-                auto m1=ask(l,r,2*x+1,lx,m);
-                auto m2=ask(l,r,2*x+2,m,rx);
+                auto m1=qry(l,r,2*x+1,lx,m);
+                auto m2=qry(l,r,2*x+2,m,rx);
                 return apply(merge(m1,m2),lazy[x],min(rx,r)-max(lx,l));
         }
         void chg(int l, int r, int v){
                 chg(l,r+1,v,0,0,sz);
         }
-        int ask(int l, int r){
-                return ask(l,r+1,0,0,sz);
+        int qry(int l, int r){
+                return qry(l,r+1,0,0,sz);
         }
 };

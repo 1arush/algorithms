@@ -1,4 +1,5 @@
 // adapted from problem: 1921f
+// the IDEA is to answer queries in 2 types : simulation and precomputation
 
 int n, q;
 const int rt=sqrt(n);  // maybe 450

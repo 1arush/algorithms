@@ -3,7 +3,8 @@
 
 const int nax=2e5+5;
 
-int fen[nax], n;
+vector<int> fen(nax);
+int n;
 
 void reset(int sz){
         for(int i=0; i<=sz; ++i) fen[i]=0;

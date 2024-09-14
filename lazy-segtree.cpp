@@ -1,5 +1,5 @@
 // it suffices to change merge and apply 
-// uses inclusive queries for calling
+// uses exclusive queries for calling
 // originally for addition and sum (more @EDU)
 
 struct Segtree {
@@ -58,9 +58,9 @@ struct Segtree {
                 return apply(merge(m1,m2),lazy[x],min(rx,r)-max(lx,l));
         }
         void chg(int l, int r, int v){
-                chg(l,r+1,v,0,0,sz);
+                chg(l,r,v,0,0,sz);
         }
         int qry(int l, int r){
-                return qry(l,r+1,0,0,sz);
+                return qry(l,r,0,0,sz);
         }
 };
